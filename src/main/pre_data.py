@@ -16,9 +16,7 @@ def pre_data():
     assert(len(X_validation) == len(y_validation))
     assert(len(X_test) == len(y_test))
     
-    print()
     print("Image Shape: {}".format(X_train[0].shape))
-    print()
     print("Training Set:   {} samples".format(len(X_train)))
     print("Validation Set: {} samples".format(len(X_validation)))
     print("Test Set:       {} samples".format(len(X_test)))

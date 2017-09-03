@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/main/model.py=utf-8
+encoding//src/main/pre_data.py=utf-8
 encoding//src/main/train_and_evaluate.py=utf-8
