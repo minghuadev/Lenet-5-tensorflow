@@ -1,7 +1,7 @@
 #coding=utf-8
 '''
 Created on 2017年9月1日
-@author: zhengying
+@author: wingdi
 '''
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np

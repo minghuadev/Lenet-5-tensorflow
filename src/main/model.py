@@ -1,7 +1,7 @@
 #coding=utf-8
 '''
 Created on 2017年9月1日
-@author: zhengying
+@author: wingdi
 '''
 import tensorflow as tf
 from tensorflow.contrib.layers import flatten
@@ -14,16 +14,21 @@ def init_bias(shape):
     b = tf.zeros(shape)
     return tf.Variable(b)
 
-def LeNet(x):    
-    # Input = 32x32x1. Output = 28x28x6.
+def LeNet(x):
+    # name:      conv5-6    
+    # structure: Input = 32x32x1. Output = 28x28x6.
+    # weights:   (5*5*1+1)*6
+    # connections: (28*28*5*5+28*28)*6
     conv1_W = init_weight((5,5,1,6))
     conv1_b = init_bias(6)
     conv1   = tf.nn.conv2d(x, conv1_W, strides=[1, 1, 1, 1], padding='VALID') + conv1_b
     conv1 = tf.nn.relu(conv1)
     #Input = 28x28x6. Output = 14x14x6.
     conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
-
-    #Output = 10x10x16.
+    
+    #conv5-16
+    #input 14x14x6 Output = 10x10x16.
+    #weights: (5*5*6+1)*16 ---real Lenet-5 is (5*5*3+1)*6+(5*5*4+1)*9+(5*5*6+1)*1
     conv2_W = init_weight((5, 5, 6, 16))
     conv2_b = init_bias(16)
     conv2   = tf.nn.conv2d(conv1, conv2_W, strides=[1, 1, 1, 1], padding='VALID') + conv2_b
