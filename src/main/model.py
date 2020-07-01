@@ -1,13 +1,13 @@
 #coding=utf-8
 '''
-Created on 2017年9月1日
+Created on 2017-9-1
 @author: wingdi
 '''
 import tensorflow as tf
-from tensorflow.contrib.layers import flatten
+##from tensorflow.contrib.layers import flatten
 
 def init_weight(shape):
-    w = tf.truncated_normal(shape=shape, mean = 0, stddev = 0.1)
+    w = tf.compat.v1.truncated_normal(shape=shape, mean = 0, stddev = 0.1)
     return tf.Variable(w)
     
 def init_bias(shape):
@@ -21,7 +21,7 @@ def LeNet(x):
     # connections: (28*28*5*5+28*28)*6
     conv1_W = init_weight((5,5,1,6))
     conv1_b = init_bias(6)
-    conv1   = tf.nn.conv2d(x, conv1_W, strides=[1, 1, 1, 1], padding='VALID') + conv1_b
+    conv1   = tf.compat.v1.nn.conv2d(x, conv1_W, strides=[1, 1, 1, 1], padding='VALID') + conv1_b
     conv1 = tf.nn.relu(conv1)
     #Input = 28x28x6. Output = 14x14x6.
     conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
@@ -36,8 +36,8 @@ def LeNet(x):
     #Input = 10x10x16. Output = 5x5x16.
     conv2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
     #Input = 5x5x16. Output = 400.
-    fc0   = flatten(conv2)
-    
+    fc0   = tf.compat.v1.layers.flatten(conv2)
+
     #Input = 400. Output = 120.
     fc1_W = init_weight((400,120))
     fc1_b = init_bias(120)
